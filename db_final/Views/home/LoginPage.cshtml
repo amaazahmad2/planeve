@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using db_final.Models;
+@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | Login</title>
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+
+    <script type="text/javascript">
+
+        function checkData() {
+            var uname = document.getElementById("un").value;
+            var pass = document.getElementById("pas").value;
+
+
+            if (uname == "" || pass == "") {
+                alert("Please Enter All Fields");
+                return false;
+            }
+
+            else if (pass.length < 6) {
+                alert("Password should be at least 6 characters long");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</head>
+<body>
+    <form class="formContainer" method="post" onsubmit="return checkData();" action="../Home/LoginUser">
+        <h1 class="formContainerHeading">Login</h1>
+        <input type="text" placeholder="Username" id="un" name="username">
+        <input type="password" placeholder="Password" id="pas" name="password">
+        <input type="submit"  value="LOGIN">
+        <br />
+        <br />
+        <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+        <br />
+        <br />
+        <p class="signupText">Don't have an account?</p>
+        <a class="signupLink" href="~/Home/SignupPage">Click here to Sign-up </a>
+        <p class="signupText">and Start Planning Your Event</p>
+    </form>
+</body>
+</html>

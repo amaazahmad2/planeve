@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+@model  string
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+    <title>Caterer</title>
+    <script type="text/javascript">
+
+        function checkfornullvalues() {
+            var dv = document.getElementById("deleteDecorator").value;
+
+            if (dv == "") {
+                alert("Please Enter Decorator Name");
+                document.getElementById('deleteDecorator').style.backgroundColor = "red";
+                document.getElementById('deleteDecorator').focus();
+                return false;
+            }
+            else {
+                document.getElementById("dform1").action = "../Home/deleteCaterer";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <form class="formContainer" id="dform1" name="form1" method="post">
+            <h1 class="formContainerHeading">Delete Caterer</h1>
+            <input type="text" placeholder="Caterer Name" id="deleteDecorator" name="deletedecorator" />
+            <br />
+            <input type="submit" value="Delete" onclick="checkfornullvalues()" />
+            <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+            <a class="signupLink" href="~/Home/CaterersBySP">Click here to view registered Caterer</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using db_final.Models;
+@model List<DJ>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | DJs</title>
+    <link rel="stylesheet" href="~/Content/stylesheets/PhotographersPage_stylesheet.css">
+    <style>
+        @@font-face {
+            font-family: Calligraffitti-Regular;
+            src: url('../../Content/fonts/Calligraffitti-Regular.ttf');
+        }
+
+        @@font-face {
+            font-family: Marzo;
+            src: url('../../Content/fonts/Marzo.ttf');
+        }
+    </style>
+    <script type="text/javascript">
+
+        function checkSearchFields() {
+            var maxPrice = document.getElementById("searchMaxPrice").value.length;
+            var minPrice = document.getElementById("searchMinPrice").value.length;
+
+            if (maxPrice == 0)
+                document.getElementById("searchMaxPrice").value = 2147483647;
+            if (minPrice == 0)
+                document.getElementById("searchMinPrice").value = 0;
+
+            return true;
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logoContainer">
+                <img class="logo" src="~/Content/images/logo.jpg">
+            </div>
+
+            <div class="optionsContainer">
+                @if (Session["Cust_username"] == null)
+                {
+                    <div class="dropdown">
+                        <div class="dropbtn">Service Providers</div>
+
+                        <div class="dropdown-content">
+                            <a href="~/Home/SP_SignupPage">Sign-Up</a>
+                            <a href="~/Home/SP_LoginPage">Log-In</a>
+                        </div>
+                    </div>
+                    <a class="headerOption" href="~/Home/LoginPage">Log-In</a>
+                    <a class="headerOption" href="~/Home/SignupPage">Sign-Up</a>
+                }
+                else
+                {
+                    <a class="headerOption" href="../Home/Customer_nullifySession">Log Out</a>
+                    <a class="headerOption" href="~/Home/ProfilePage">My Profile</a>
+                }
+                <div class="dropdown">
+                    <div class="dropbtn">Services</div>
+                    <div class="dropdown-content">
+                        <a href="~/Home/VenuesPage">Venues</a>
+                        <a href="~/Home/PhotographersPage">Photographers</a>
+                        <a href="~/Home/DJsPage">DJs</a>
+                        <a href="~/Home/CaterersPage">Caterers</a>
+                        <a href="~/Home/DecoratorsPage">Decorators</a>
+                    </div>
+                </div>
+                <a class="headerOption" href="~/Home/MainPage">Home</a>
+            </div>
+        </div>
+
+        <div class="bodyContent">
+            <div class="serviceTitleContainer">
+                <h1 class="serviceTitle">DJs</h1>
+            </div>
+            <form class='addressSearchBarContainer' onsubmit="return checkSearchFields();" method="post" action="../Home/SearchDJs">
+                <br />
+                <h1 class="priceTitle">Max Price: </h1>
+                <input id="searchMaxPrice" class="priceTextBox" type="number" name="maxPrice"></input>
+                <br />
+                <h1 class="priceTitle">Min Price: </h1>
+                <input id="searchMinPrice" class="priceTextBox" type="number" name="minPrice"></input>
+                <input type="submit" class="searchButton" value="SEARCH"></input>
+            </form>
+
+
+            <ul class="serviceItemListContainer">
+
+
+                @foreach (DJ v in Model)
+                {
+                    if (@v.featured == "True")
+                    {
+                        <li class='featuredServiceItem'>
+                            <div class="itemDetailsLeft">
+                                <img class="featuredItemImage" src='~/Content/images/background.png'>
+                                <div class='itemNameContainer'>
+                                    <h1 class='itemName'>@v.name</h1>
+                                    <form method="post" action="../Home/SP_DetailsPage">
+                                        <input type="hidden" value="@v.providerID" name="serviceProviderUsername" />
+                                        <input type="hidden" value="DJs" name="serviceCategory" />
+                                        <input type="submit" class="itemDetailsTrigger" id="detailsModalTrigger" value="SERVICE PROVIDER REVIEWS AND DETAILS" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="itemDetailsRight">
+                                <div class='itemPriceContainer'>
+                                    @if (@v.discount == "0")
+                                    {
+                                        <h1 class="itemName">Rs. @v.price / event</h1>
+                                    }
+                                    else
+                                    {
+                                        <h1 class="itemName">Rs. @v.price / event</h1>
+                                        <h1 class='itemAddress'>Applicable Discount: Upto @v.discount%</h1>
+                                    }
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='serviceItem'>
+                            <div class="itemDetailsLeft">
+                                <img class="itemImage" src='~/Content/images/background.png'>
+                                <div class='itemNameContainer'>
+                                    <h1 class='itemName'>@v.name</h1>
+                                    <form method="post" action="../Home/SP_DetailsPage">
+                                        <input type="hidden" value="@v.providerID" name="serviceProviderUsername" />
+                                        <input type="hidden" value="DJs" name="serviceCategory" />
+                                        <input type="submit" class="itemDetailsTrigger" id="detailsModalTrigger" value="SERVICE PROVIDER REVIEWS AND DETAILS" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="itemDetailsRight">
+                                <div class='itemPriceContainer'>
+                                    @if (@v.discount == "0")
+                                    {
+                                        <h1 class="itemName">Rs. @v.price / event</h1>
+                                    }
+                                    else
+                                    {
+                                        <h1 class="itemName">Rs. @v.price / event</h1>
+                                        <h1 class='itemAddress'>Applicable Discount: Upto @v.discount%</h1>
+                                    }
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

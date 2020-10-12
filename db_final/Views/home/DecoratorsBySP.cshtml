@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using db_final.Models;
+@model Decorator
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | Decorators</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/stylesheets/VenuesPage_stylesheet.css")" type="text/css">
+    <style>
+        @@font-face {
+            font-family: Calligraffitti-Regular;
+            src: url('../../Content/fonts/Calligraffitti-Regular.ttf');
+        }
+
+        @@font-face {
+            font-family: Marzo;
+            src: url('../../Content/fonts/Marzo.ttf');
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logoContainer">
+                <img class="logo" src="~/Content/images/logo.jpg">
+            </div>
+
+            <div class="optionsContainer">
+                <a class="headerOption" href="../Home/SP_nullifySession">Log Out</a>
+                <a class="headerOption" href="~/Home/SP_ProfilePage">My Profile</a>
+            </div>
+        </div>
+
+        <div class="bodyContent">
+            <div class="serviceTitleContainer">
+                <h1 class="addressSearchTitle" style="margin-top:2rem; font-size:24px;">Decorators Provided By: @Session["SP_username"]</h1>
+            </div>
+
+
+            <ul class="serviceItemListContainer">
+
+
+                @if (Model.providerID != "")
+                {
+                    if (Model.featured == "True")
+                    {
+                        <li class='featuredServiceItem'>
+                            <div class="itemDetailsLeft">
+                                <img class="featuredItemImage" src='~/Content/images/background.png'>
+                                <div class='itemNameContainer'>
+                                    <h1 class='itemName'>@Model.name</h1>
+                                    <a style="font-weight:bold;" class="itemLink" href="http://@Model.samplesLink">Samples</a>
+
+                                </div>
+                            </div>
+                            <div class="itemDetailsRight">
+                                <div class='itemPriceContainer'>
+
+                                    <h1 class="itemName">Rs. @Model.price / person</h1>
+                                    <h1 class='itemAddress'>Applicable Discount: Upto @Model.discount%</h1>
+
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='serviceItem'>
+                            <div class="itemDetailsLeft">
+                                <img class="itemImage" src='~/Content/images/background.png'>
+                                <div class='itemNameContainer'>
+                                    <h1 class='itemName'>@Model.name</h1>
+                                    <a class="itemLink" href="http://@Model.samplesLink">Samples</a>
+
+                                </div>
+                            </div>
+                            <div class="itemDetailsRight">
+                                <div class='itemPriceContainer'>
+
+
+                                    <h1 class="itemName">Rs. @Model.price / person</h1>
+                                    <h1 class='itemAddress'>Applicable Discount: Upto @Model.discount%</h1>
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+
+
+            </ul>
+
+            <div class="itemOptionsContainer">
+                <h1 class="detail">Add, Remove or Edit Services</h1>
+                <div class="buttonContainer">
+
+                    @if (Model.providerID == "")
+                    {
+                        <input class="button" type="button" value="Add Decorator" onclick="location.href = 'Decorator_SignUp'"></input>
+                    }
+                    else
+                    {
+
+                        <input class="button" type="button" value="Remove Decorator" onclick="location.href = 'Decorator_Deletion'"></input>
+                        <input class="button" type="button" value="Update Decorator" onclick="location.href = 'Decorator_Update'"></input>
+                    }
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

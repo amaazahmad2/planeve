@@ -1,0 +1,113 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0.85;
+    background-image: url("../images/background.png");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.formContainer {
+    width: 35%;
+    padding: 25px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(16,26,35,0.95);
+    text-align: center;
+    border-radius: 50px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.formContainerHeading {
+    font-size: 30px;
+    color: white;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+}
+
+.formContainer input[type="text"], .formContainer input[type="password"], .formContainer input[type="tel"], .formContainer input[type="email"] ,
+.formContainer input[type="number"]
+{
+    border: 0;
+    background: transparent;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid white;
+    padding: 14px 10px;
+    width: 300px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    border-width: 1.5px;
+    transition: 0.25s;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+}
+
+    .formContainer input[type="text"]:hover, .formContainer input[type="password"]:hover, .formContainer input[type="tel"]:hover, .formContainer input[type="email"]:hover,.formContainer input[type="number"]:hover {
+        border-color: #3498db;
+    }
+
+    .formContainer input[type="text"]:focus, .formContainer input[type="password"]:focus, .formContainer input[type="tel"]:focus, .formContainer input[type="email"]:focus, .formContainer input[type="number"]:focus {
+        border-color: #2ecc71;
+        width: 400px;
+    }
+
+.formContainer input[type='submit'] {
+    display: inline-block;
+    width: 90px;
+    padding: 7px 7px;
+    color: white;
+    font-size: 15px;
+    transition: 0.5s;
+    background-color: transparent;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    margin: 10px;
+    border-width: 1.5px;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+}
+
+    .formContainer input[type='submit']:hover {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+        width: 110px;
+    }
+
+.signupText {
+    color: white;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+    margin: 3px;
+}
+
+
+.errorText {
+    color: red;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+    margin: 3px;
+}
+
+.signupLink {
+    color: #3498db;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+}

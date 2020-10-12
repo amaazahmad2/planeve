@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+@model  string
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+    <title>Caterers Signup</title>
+    <script type="text/javascript">
+
+        function checkfornullvalues() {
+            var sp = document.getElementById("spid").value;
+            var vname = document.getElementById("vname").value;
+            var p = document.getElementById("price").value;
+            var d = document.getElementById("discount").value;
+
+            if (sp == "") {
+                alert("Please Enter Service Provider ID");
+                document.getElementById('spid').style.backgroundColor = "red";
+                document.getElementById('spid').focus();
+                return false;
+            }
+            else if (sp != document.getElementById("hiddensession").value) {
+                alert("Incorrect Service ProviderID");
+                document.getElementById('spid').style.backgroundColor = "red";
+                document.getElementById('spid').focus();
+                return false;
+            }
+            else if (vname == "") {
+                alert("Please Enter Caterer Name");
+                document.getElementById('vname').style.backgroundColor = "red";
+                document.getElementById('vname').focus();
+                return false;
+            }
+            else if (p == "") {
+                alert("Please Enter Price");
+                document.getElementById('price').style.backgroundColor = "red";
+                document.getElementById('price').focus();
+                return false;
+            }
+            else if (d == "") {
+                alert("Please Enter Discount");
+                document.getElementById('discount').style.backgroundColor = "red";
+                document.getElementById('discount').focus();
+                return false;
+            }
+            else if (sp != "" && vname != "" && p != null && d != null) {
+                document.getElementById("form1").action = "../Home/addCaterer";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <form class="formContainer" id="form1" name="form1" method="post">
+            <h1 class="formContainerHeading">Add Caterer</h1>
+            <input type="text" placeholder="Service Provider Id" id="spid" name="spid" />
+            <br />
+            <input type="text" placeholder="Caterer Name" id="vname" name="vname" />
+            <br />
+            <input type="text" placeholder="Price" id="price" name="price" />
+            <br />
+            <input type="text" placeholder="Discount" id="discount" name="discount" />
+            <br />
+            <input type="text" placeholder="Link for Samples" id="samples" name="samples" />
+            <br />
+            <input type="hidden" value="@Session["SP_username"]" id="hiddensession" />
+            <input type="submit" value="Sign Up" onclick="checkfornullvalues()" />
+            <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+            <a class="signupLink" href="~/Home/CaterersBySP">Click here to see registered Caterers </a>
+        </form>
+    </div>
+</body>
+</html>

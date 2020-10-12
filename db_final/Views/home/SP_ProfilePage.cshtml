@@ -1,0 +1,171 @@
+﻿
+@{
+    Layout = null;
+}
+@using db_final.Models;
+@model ServiceProvider
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | Venues</title>
+    <link rel="stylesheet" href="~/Content/stylesheets/SP_ProfilePage_stylesheet.css">
+    <style>
+        @@font-face {
+            font-family: Calligraffitti-Regular;
+            src: url('../../Content/fonts/Calligraffitti-Regular.ttf');
+        }
+
+        @@font-face {
+            font-family: Marzo;
+            src: url('../../Content/fonts/Marzo.ttf');
+        }
+    </style>
+    <script type="text/javascript">
+
+        function checkPasswordData() {
+            var oldPassword = document.getElementById("oldPassword").value;
+            var newPassword = document.getElementById("newPassword").value;
+            var confirmNewPassword = document.getElementById("confirmNewPassword").value;
+
+            if (oldPassword == "" || newPassword == "" || confirmNewPassword=="") {
+                alert("Please Enter All Fields");
+                return false;
+            }
+            else if (newPassword != confirmNewPassword) {
+                alert("New Passwords Do Not Match!");
+                return false;
+            }
+            else if (newPassword.length < 6) {
+                alert("Password should be at least 6 characters long");
+                return false;
+            }
+            return true;
+        }
+
+        function checkDetailsData() {
+            var contactNum = document.getElementById("contactNum").value;
+            var email = document.getElementById("email").value;
+            if (contactNum == "" || email== "") {
+                alert("Please Enter All Fields");
+                return false;
+            }
+            return true;
+        }
+        
+    </script>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logoContainer">
+                <img class="logo" src="~/Content/images/logo.jpg">
+            </div>
+
+            <div class="optionsContainer">
+                <a class="headerOption"   href="../Home/SP_nullifySession">Log Out</a>
+                <a class="headerOption" href="">My Profile</a>
+            </div>
+        </div>
+
+        <div class="bodyContent">
+            <div class="detailsContainer">
+                <h1 class="detail">Username: @Model.username</h1>
+                <h1 class="detail">Email: @Model.email</h1>
+                <h1 class="detail">CNIC: @Model.cnic</h1>
+                <h1 class="detail">Contact Number: @Model.contactNum</h1>
+                <h1 class="detail">Account Activated Since: @Model.accountActivationDate</h1>
+                <div class="buttonContainer">
+                    <input id="passwordButton" class="button" type="button" value="Change Password"></input>
+                    <input id="detailsButton" class="button" type="button" value="Update Details"></input>
+                </div>
+
+            </div>
+            <div class="serviceOptionsContainer">
+                <h1 class="detail">Add, Remove or Edit Services</h1>
+                <div class="buttonContainer">
+                    <input class="button" type="button" value="Venues" onclick="location.href='VenuesBySP'"></input>
+                    <input class="button" type="button" value="Photographers" onclick="location.href='PhotographersBySP'"></input>
+                    <input class="button" type="button" value="DJs" onclick="location.href='DJsBySP'"></input>
+                    <input class="button" type="button" value="Caterers" onclick="location.href='CaterersBySP'"></input>
+                    <input class="button" type="button" value="Decorators" onclick="location.href='DecoratorsBySP'"></input>
+                </div>
+            </div>
+
+
+
+            <div id="passwordModalContainer" class="modal">
+                <div id="passwordModalContent" class="modal-content">
+                    <span id="passwordModalCloseButton" class="close-button">×</span>
+                    <form class="modalTextFieldsContainer" method="post" onsubmit="return checkPasswordData()" action="../Home/SP_ChangePassword">
+                        <input class="modalTextField" type="password" placeholder="Old Password" id="oldPassword" name="oldPassword">
+                        <input class="modalTextField" type="password" placeholder="New Password" id="newPassword" name="newPassword">
+                        <input class="modalTextField" type="password" placeholder="Re-Enter New Password" id="confirmNewPassword">
+                        <input class="modalSubmitButton" type="submit" id="passwordModalSubmitButton">
+                    </form>
+                </div>
+            </div>
+
+            <div id="detailsModalContainer" class="modal">
+                <div id="detailsModalContent" class="modal-content">
+                    <span id="detailsModalCloseButton" class="close-button">×</span>
+                    <form class="modalTextFieldsContainer" method="post" onsubmit="return checkDetailsData()" action="../Home/SP_ChangeDetails">
+                        <input class="modalTextField" type="email" placeholder="Email" id="email" name="email">
+                        <input class="modalTextField" type="tel" placeholder="Contact Number e.g 0300-1234567" id="contactNum" pattern="[0-9]{4}-[0-9]{7}" name="contactNum">
+                        <input class="modalSubmitButton" type="Submit" id="detailsModalSubmitButton">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    var passwordModal = document.getElementById("passwordModalContainer")
+    var passwordModalTrigger = document.getElementById("passwordButton")
+    var passwordModalCloseButton = document.getElementById("passwordModalCloseButton")
+
+    function togglePasswordModal() {
+        passwordModal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick_password(event) {
+        if (event.target === passwordModal) {
+            togglePasswordModal();
+        }
+    }
+
+    passwordModalTrigger.addEventListener("click", togglePasswordModal);
+    passwordModalCloseButton.addEventListener("click", togglePasswordModal);
+    window.addEventListener("click", windowOnClick_password);
+
+
+
+    var detailsModal = document.getElementById("detailsModalContainer")
+    var detailsModalTrigger = document.getElementById("detailsButton")
+    var passwordModalCloseButton = document.getElementById("detailsModalCloseButton")
+
+    function toggleDetailsModal() {
+        detailsModal.classList.toggle("show-modal");
+    }
+
+    function windowOnClick_details(event) {
+        if (event.target === detailsModal) {
+            toggleDetailsModal();
+        }
+    }
+
+    detailsModalTrigger.addEventListener("click", toggleDetailsModal);
+    detailsModalCloseButton.addEventListener("click", toggleDetailsModal);
+    window.addEventListener("click", windowOnClick_details);
+
+</script>
+
+</html>

@@ -1,0 +1,306 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    z-index: 0;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: fixed;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: calc(100% - 4px);
+    background-color: #101A23;
+    height: 15%;
+    margin-left: 1.5px;
+}
+
+    .header:after, .header:before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        width: calc(100% + 6px);
+        height: calc(100% + 6px);
+        background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+        z-index: -1;
+        background-size: 400%;
+        animation: borderAnimation 40s linear infinite;
+    }
+
+@keyframes borderAnimation {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.logoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    height: 100%;
+    width: 50%;
+    background-color: transparent;
+    margin-left: 40px;
+    padding: 0px 0px;
+}
+
+.logo {
+    font-family: 'Calligraffitti-Regular';
+    font-size: 65px;
+    color: white;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    height: 100%;
+    position: relative;
+    width: 8rem;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+.optionsContainer {
+    position: relative;
+    background-color: transparent;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 70px;
+    animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+.headerOption {
+    color: white;
+    font-family: 'Tahoma';
+    font-style: normal;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+    .headerOption:hover {
+        text-decoration: underline;
+        text-decoration-color: #3498db;
+        color: #3498db
+    }
+
+.bodyContent {
+    background-color: #101A23;
+    width: 100%;
+    height: 85%;
+    z-index: -2;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.detailsContainer {
+    width: 100%;
+    margin-top: 5rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.detail {
+    font-family: 'Marzo';
+    font-size: 20px;
+    color: white;
+    letter-spacing: 0.4rem;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+}
+
+.button {
+    display: inline-block;
+    width: 9rem;
+    padding: 7px 7px;
+    color: white;
+    font-size: 15px;
+    transition: 0.5s;
+    background-color: transparent;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: white;
+    margin: 10px;
+    border-width: 1.5px;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+}
+
+    .button:hover {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+    }
+
+.serviceOptionsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+}
+
+
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+    .close-button:hover {
+        background-color: darkgray;
+    }
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+
+.modalTextFieldsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.modalTextField {
+    border: 0;
+    background: transparent;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid black;
+    padding: 14px 10px;
+    width: 300px;
+    outline: none;
+    color: black;
+    border-radius: 24px;
+    border-width: 1.5px;
+    transition: 0.25s;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+}
+
+    .modalTextField:hover {
+        border-color: #3498db;
+    }
+
+    .modalTextField:focus {
+        border-color: #2ecc71;
+    }
+
+.modalSubmitButton {
+    display: inline-block;
+    width: 90px;
+    padding: 7px 7px;
+    color: #3498db;
+    font-size: 15px;
+    transition: 0.5s;
+    background-color: transparent;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #3498db;
+    margin: 10px;
+    border-width: 1.5px;
+    font-style: italic;
+    font-family: 'Trebuchet MS';
+    font-size: 15px;
+}
+
+    .modalSubmitButton:hover {
+        background-color: #3498db;
+        color: white;
+    }

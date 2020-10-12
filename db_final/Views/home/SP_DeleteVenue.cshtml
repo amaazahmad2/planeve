@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+@model  string
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+    <title>Venues</title>
+    <script type="text/javascript">
+
+         function checkfornullvalues() {
+             var dv = document.getElementById("deletevenue").value;
+
+             if (dv == "") {
+                 alert("Please Enter Venue Name");
+                 document.getElementById('deletevenue').style.backgroundColor = "red";
+                 document.getElementById('deletevenue').focus();
+                 return false;
+             }
+             else {
+                 document.getElementById("form1").action = "../Home/deleteVenue";
+             }
+         }
+    </script>
+</head>
+<body>
+    <div>
+        <form class="formContainer" id="form1" name="form1" method="post">
+            <h1 class="formContainerHeading">Delete Venue</h1>
+            <input type="text" placeholder="Venue Name" id="deletevenue" name="venueName" />
+            <input type="hidden" value="@Session["SP_username"]" name="username"/>
+            <br />
+            <input type="submit" value="Delete" onclick="checkfornullvalues()" />
+            <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+            <a class="signupLink" href="~/Home/VenuesBySp">Click here to view already registered venues </a>
+        </form>
+    </div>
+</body>
+</html>

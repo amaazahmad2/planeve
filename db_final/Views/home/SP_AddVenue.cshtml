@@ -1,0 +1,84 @@
+﻿
+@{
+    Layout = null;
+}
+@model  string
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+    <title>Venues</title>
+    <script type="text/javascript">
+
+         function checkfornullvalues() {
+             var sp = document.getElementById("spid").value;
+             var vname = document.getElementById("vname").value;
+             var add = document.getElementById("vadd").value;
+             var p = document.getElementById("price").value;
+             var d = document.getElementById("discount").value;
+
+             if (sp == "") {
+                 alert("Please Enter Service Provider ID");
+                 document.getElementById('spid').style.backgroundColor = "red";
+                 document.getElementById('spid').focus();
+                 return false;
+             }
+             else if (sp != document.getElementById("hiddensession").value)
+             {
+                 alert("Incorrect Service ProviderID");
+                 document.getElementById('spid').style.backgroundColor = "red";
+                 document.getElementById('spid').focus();
+                 return false;
+             }
+             else if (vname == "") {
+                 alert("Please Enter Venue Name");
+                 document.getElementById('vname').style.backgroundColor = "red";
+                 document.getElementById('vname').focus();
+                 return false;
+             }
+             else if (add == "") {
+                 alert("Please Enter Address of the Venue");
+                 document.getElementById('vadd').style.backgroundColor = "red";
+                 document.getElementById('vadd').focus();
+                 return false;
+             }
+             else if (p == "") {
+                 alert("Please Enter Price");
+                 document.getElementById('price').style.backgroundColor = "red";
+                 document.getElementById('price').focus();
+                 return false;
+             }
+             else if (d == "") {
+                 alert("Please Enter Discount");
+                 document.getElementById('discount').style.backgroundColor = "red";
+                 document.getElementById('discount').focus();
+                 return false;
+             }
+             return true;
+         }
+    </script>
+</head>
+<body>
+    <div>
+        <form class="formContainer" id="form1" name="form1" method="post" action = "../Home/addNewVenue" onsubmit="return checkfornullvalues();">
+            <h1 class="formContainerHeading">Add Venue</h1>
+            <input type="text" placeholder="Service Provider Id" id="spid" name="spid" />
+            <br />
+            <input type="text" placeholder="Venue Name" id="vname" name="vname" maxlength="150"/>
+            <br />
+            <input type="text" placeholder="Venue Address" id="vadd" name="vadd" maxlength="1200"/>
+            <br />
+            <input type="number" placeholder="Price" id="price" name="price" />
+            <br />
+            <input type="number" placeholder="Discount(in percentage)" id="discount" name="discount"  min="0" max="100"/>
+            <br />
+            <input type="hidden" value="@Session["SP_username"]" id="hiddensession" />
+            <input type="submit" value="Sign Up" />
+            <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+            <a class="signupLink" href="~/Home/VenuesBySp">Click here to see already registered venues </a>
+        </form>
+    </div>
+</body>
+</html>

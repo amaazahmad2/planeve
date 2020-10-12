@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+@model  string
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+    <title>Venues</title>
+    <script type="text/javascript">
+
+         function checkfornullvalues() {
+             var vn = document.getElementById("venuename").value;
+             var up = document.getElementById("updprice").value;
+             var ud = document.getElementById("upddiscount").value;
+
+             if (vn == "") {
+                 alert("Please Enter Venue Name");
+                 document.getElementById('venuename').style.backgroundColor = "red";
+                 document.getElementById('venuename').focus();
+                 return false;
+             }
+             else if (up == "")
+             {
+                 alert("Please Enter Updated Price ");
+                 document.getElementById('updprice').style.backgroundColor = "red";
+                 document.getElementById('updprice').focus();
+                 return false;
+             }
+             else if (ud == "") {
+                 alert("Please Enter Updated Discount ");
+                 document.getElementById('upddiscount').style.backgroundColor = "red";
+                 document.getElementById('upddiscount').focus();
+                 return false;
+             }
+             else {
+                 document.getElementById("updvenueform").action = "../Home/updateVenue";
+             }
+         }
+    </script>
+</head>
+<body>
+    <div>
+        <form class="formContainer" id="updvenueform" name="updvenueform" method="post">
+            <h1 class="formContainerHeading">Update Venue</h1>
+            <p style="color: white; font-style: normal; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">Enter Venue Name that's need to be updated in the following textbox</p>
+            <input type="text" placeholder="Venue Name" id="venuename" name="venuename" />
+            <br />
+            <input type="text" placeholder="Update Price" id="updprice" name="updprice" />
+            <br />
+            <input type="text" placeholder="Update Discount" id="upddiscount" name="upddiscount" />
+            <br />
+            <input type="submit" value="Update" onclick="checkfornullvalues()" />
+            <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+            <a class="signupLink" href="~/Home/VenuesBySp">Click here to view already registered venues </a>
+        </form>
+    </div>
+</body>
+</html>

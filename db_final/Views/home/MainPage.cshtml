@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | Home</title>
+    <link rel="stylesheet" href="~/Content/stylesheets/MainPage_stylesheet.css">
+    <style>
+        @@font-face {
+            font-family: Calligraffitti-Regular;
+            src: url('../../Content/fonts/Calligraffitti-Regular.ttf');
+        }
+        @@font-face{
+            font-family:Marzo;
+            src:url('../../Content/fonts/Marzo.ttf');
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logoContainer">
+                <img class="logo" src="~/Content/images/logo.jpg">
+            </div>
+
+            <div class="optionsContainer">
+                @if (Session["Cust_username"] == null)
+                {
+                    <div class="dropdown">
+                        <div class="dropbtn">Service Providers</div>
+
+                        <div class="dropdown-content">
+                            <a href="~/Home/SP_SignupPage">Sign-Up</a>
+                            <a href="~/Home/SP_LoginPage">Log-In</a>
+                        </div>
+                    </div>
+                    <a class="headerOption" href="~/Home/LoginPage">Log-In</a>
+                    <a class="headerOption" href="~/Home/SignupPage">Sign-Up</a>
+                }
+                else
+                {
+                    <a class="headerOption" href="../Home/Customer_nullifySession">Log Out</a>
+                    <a class="headerOption" href="~/Home/ProfilePage">My Profile</a>
+                }
+                <div class="dropdown">
+                    <div class="dropbtn">Services</div>
+                    <div class="dropdown-content">
+                        <a href="~/Home/VenuesPage">Venues</a>
+                        <a href="~/Home/PhotographersPage">Photographers</a>
+                        <a href="~/Home/DJsPage">DJs</a>
+                        <a href="~/Home/CaterersPage">Caterers</a>
+                        <a href="~/Home/DecoratorsPage">Decorators</a>
+                    </div>
+                </div>
+                <a class="headerOption" href="~/Home/MainPage">Home</a>
+            </div>
+        </div>
+
+        <div class="bodyContent">
+            <div class=taglineContainer>
+                <h1 class="tagline">IT'S ALL<br /> COMING<br /> TOGETHER</h1>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

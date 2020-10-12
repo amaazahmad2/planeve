@@ -1,0 +1,117 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using db_final.Models;
+@model List<Venue>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | Venues</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/stylesheets/VenuesPage_stylesheet.css")" type="text/css">
+    <style>
+        @@font-face {
+            font-family: Calligraffitti-Regular;
+            src: url('../../Content/fonts/Calligraffitti-Regular.ttf');
+        }
+
+        @@font-face {
+            font-family: Marzo;
+            src: url('../../Content/fonts/Marzo.ttf');
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logoContainer">
+                <img class="logo" src="~/Content/images/logo.jpg">
+            </div>
+
+            <div class="optionsContainer">
+                <a class="headerOption" href="../Home/SP_nullifySession">Log Out</a>
+                <a class="headerOption" href="~/Home/SP_ProfilePage">My Profile</a>
+            </div>
+        </div>
+
+        <div class="bodyContent">
+            <div class="serviceTitleContainer">
+                <h1 class="addressSearchTitle" style="margin-top:2rem; font-size:24px;">Venues Provided By: @Session["SP_username"]</h1>
+            </div>
+
+
+            <ul class="serviceItemListContainer">
+
+
+                @foreach (Venue v in Model)
+                {
+                    if (@v.featured == "True")
+                    {
+                        <li class='featuredServiceItem'>
+                            <div class="itemDetailsLeft">
+                                <img class="featuredItemImage" src='~/Content/images/background.png'>
+                                <div class='itemNameContainer'>
+                                    <h1 class='itemName'>@v.venueName</h1>
+                                    <h1 class='itemAddress'>@v.venueAddress</h1>
+                                </div>
+                            </div>
+                            <div class="itemDetailsRight">
+                                <div class='itemPriceContainer'>
+
+                                    <h1 class="itemName">Rs. @v.price / person</h1>
+                                    <h1 class='itemAddress'>Applicable Discount: Upto @v.discount%</h1>
+
+
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class='serviceItem'>
+                            <div class="itemDetailsLeft">
+                                <img class="itemImage" src='~/Content/images/background.png'>
+                                <div class='itemNameContainer'>
+                                    <h1 class='itemName'>@v.venueName</h1>
+                                    <h1 class='itemAddress'>@v.venueAddress</h1>
+                                </div>
+                            </div>
+                            <div class="itemDetailsRight">
+                                <div class='itemPriceContainer'>
+
+                                    <h1 class="itemName">Rs. @v.price / person</h1>
+                                    <h1 class='itemAddress'>Applicable Discount: Upto @v.discount%</h1>
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                }
+
+            </ul>
+
+            <div class="itemOptionsContainer">
+                <h1 class="detail">Add, Remove or Edit Services</h1>
+                <div class="buttonContainer">
+                    <input id="addButton" class="button" type="button" value="Add Venue" onclick="location.href = 'SP_AddVenue'"></input>
+                    <input id="deleteButton" class="button" type="button" value="Remove Venue" onclick="location.href = 'SP_DeleteVenue'"></input>
+                    <input id="updateButton" class="button" type="button" value="Update Venue" onclick="location.href = 'SP_UpdateVenue'"></input>
+                </div>'
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

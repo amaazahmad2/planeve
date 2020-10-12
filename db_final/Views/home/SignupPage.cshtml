@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using db_final.Models;
+@model string
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | SignUp</title>
+    <link rel="stylesheet" href="~/Content/stylesheets/SignupAndLogin_stylesheet.css">
+
+    <script type="text/javascript">
+
+        function checkData() {
+
+            var fn = document.getElementById("fname").value;
+            var email = document.getElementById("em").value;
+            var phone = document.getElementById("pno").value;
+            var uname = document.getElementById("un").value;
+            var pass = document.getElementById("pas").value;
+            var cpass = document.getElementById("cp").value;
+
+            if (fn == "" || email == "" || phone == "" || uname == "" || pass == "" || cpass == "") {
+                alert("Please Enter All Fields");
+                return false;
+            }
+
+            else if (pass.length < 6) {
+                alert("Password should be at least 6 characters long");
+                return false;
+            }
+            else if (cpass != pass) {
+                alert("The confirmation password does not match");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</head>
+<body>
+    <form class="formContainer" method="post" onsubmit="return checkData();" action="../Home/SignupUser">
+        <h1 class="formContainerHeading">Signup</h1>
+        <input type="text" placeholder="Username" id="un" name="username">
+        <input type="text" placeholder="Full Name" id="fname" name="name">
+        <input type="email" placeholder="Email" id="em" name="email">
+        <input type="tel" placeholder="Contact Number e.g 0300-1234567" id="pno" name="contactNum" pattern="[0-9]{4}-[0-9]{7}" title=" Format: 0300-1234567">
+        <input type="password" placeholder="Password" id="pas" name="password">
+        <input type="password" placeholder="Confirm Password" id="cp" name="confirmPassword">
+        <input type="submit" placeholder="Sign-Up">
+        <br />
+        <br />
+        <p style="color: red; font-style: italic; font-family: 'Trebuchet MS'; font-size: 15px; margin: 3px;">@Model</p>
+        <br />
+        <p class="signupText">Already have an account?</p>
+        <a class="signupLink" href="~/Home/LoginPage">Click here to Sign-In </a>
+        <p class="signupText">and Start Planning Your Event</p>
+    </form>
+
+</body>
+</html>
+
+

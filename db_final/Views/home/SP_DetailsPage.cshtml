@@ -1,0 +1,142 @@
+﻿
+@{
+    Layout = null;
+}
+@using db_final.Models
+@model dynamic
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>PlanEve | Service Provider Details</title>
+    <link rel="stylesheet" href="~/Content/stylesheets/SP_Details_stylesheet.css">
+    <style>
+        @@font-face {
+            font-family: Calligraffitti-Regular;
+            src: url('../../Content/fonts/Calligraffitti-Regular.ttf');
+        }
+
+        @@font-face {
+            font-family: Marzo;
+            src: url('../../Content/fonts/Marzo.ttf');
+        }
+    </style>
+
+    <script>
+
+        function checkData() {
+
+            var rc = document.getElementById("rc").value;
+            var rr = document.getElementById("rr").value;
+
+
+            if (rr == "") {
+                alert("Please Enter All Fields");
+                return false;
+            }
+            else if (rc == "") {
+                alert("Please Enter All Fields");
+                return false;
+            }
+            else
+                return true;
+        }
+        
+
+    </script>
+    
+</head>
+
+
+
+<body>
+    <div class="container">
+
+        <div class="header">
+            <div class="logoContainer">
+                <img class="logo" src="~/Content/images/logo.jpg">
+            </div>
+
+            <div class="optionsContainer">
+                @if (Session["Cust_username"] == null)
+                {
+                    <div class="dropdown">
+                        <div class="dropbtn">Service Providers</div>
+
+                        <div class="dropdown-content">
+                            <a href="~/Home/SP_SignupPage">Sign-Up</a>
+                            <a href="~/Home/SP_LoginPage">Log-In</a>
+                        </div>
+                    </div>
+                    <a class="headerOption" href="~/Home/LoginPage">Log-In</a>
+                    <a class="headerOption" href="~/Home/SignupPage">Sign-Up</a>
+                }
+                else
+                {
+                    <a class="headerOption" href="../Home/Customer_nullifySession">Log Out</a>
+                    <a class="headerOption" href="~/Home/ProfilePage">My Profile</a>
+                }
+                <div class="dropdown">
+                    <div class="dropbtn">Services</div>
+                    <div class="dropdown-content">
+                        <a href="~/Home/VenuesPage">Venues</a>
+                        <a href="~/Home/PhotographersPage">Photographers</a>
+                        <a href="~/Home/DJsPage">DJs</a>
+                        <a href="~/Home/CaterersPage">Caterers</a>
+                        <a href="~/Home/DecoratorsPage">Decorators</a>
+                    </div>
+                </div>
+                <a class="headerOption" href="~/Home/MainPage">Home</a>
+            </div>
+        </div>
+
+        <div class="bodyContent">
+            <div class="detailsContainer">
+                <h1 class="detail">Email: @Model.SP_Details.email</h1>
+                <h1 class="detail">Contact Number: @Model.SP_Details.contactNum</h1>
+                <h1 class="detail">Member of PlanEve Since: @Model.SP_Details.accountActivationDate</h1>
+                <h1 class="detail">Average Rating: @Model.avgRating</h1>
+                <h1 class="detail" style="margin-top:3.5rem;">Reviews</h1>
+
+            </div>
+
+            
+
+            @if (Session["Cust_username"] != null )
+            {
+                <form id="reviewForm" style="display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:1.5rem" method="post" onsubmit="return checkData();" action="../Home/PostComment">
+                    <input type="hidden" value="@Model.serviceCategory" name="category" />
+                    <input type="hidden" value="@Model.SP_Details.username" name="SP_username" />
+                    <input type="hidden" value="@Session["Cust_username"].ToString()" name="Cust_username" />
+                    <div style="display:flex; flex-direction:row; justify-content:center; align-items:center; margin-top:1.5rem;color: white; font-family: 'Trebuchet MS'; font-style: italic;">
+                        <p style="font-family:'Trebuchet MS'; font-style:italic;">Write a Review:</p>
+                        <input id="rc" class="reviewInput" type="text" maxlength="500" name="reviewComment" autocomplete="off"/>
+                    </div>
+                    <div style="display:flex; flex-direction:row; justify-content:center; align-items:center;  color: white;font-family: 'Trebuchet MS'; font-style: italic;">
+                        <p style="font-family:'Trebuchet MS'; font-style:italic;">Enter Rating (0-5): </p>
+                        <input id="rr" class="ratingInput" type="number" min="0" max="5" name="reviewRating" autocomplete="off"/>
+                    </div>
+                    <input class="submitReviewButton" type="submit" placeholder="Submit Review" />
+                </form>
+            }
+
+            @foreach (Review r in Model.Reviews)
+            {
+                <div class="othersReviewsContainer" >
+                    <div style="display:flex; flex-direction:row; justify-content:space-evenly; align-items:center; width:60%; position:relative;">
+                        <p>User: @r.reviewCustomerID</p>
+                        <p>Rating: @r.reviewRating</p>
+                    </div>
+                    <p>Comment: @r.reviewComments</p>
+                </div>
+
+            }
+        </div>
+    </div>
+
+
+</body>
+
+</html>
